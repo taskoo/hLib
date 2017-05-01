@@ -487,6 +487,7 @@ label {
 /*book description properties*/
 #Description{
 	min-width: 83%;
+	padding-right:25px;
 }
 
 /*isbn additional info icon image property*/
@@ -536,6 +537,15 @@ label {
 	padding:10px 20px 10px 10px;
 	
 }
+
+#MVCGridTableHolder_AuthorSearch > .row > div {                      
+		text-align: center;
+	}
+
+#MVCGridTableHolder_AuthorSearch > .row .pagination > li {
+	display: inline-block;
+	vertical-align: middle;
+}
 /*---------------------EDIT AND CREATE BOOK PAGES---------------------*/
 
 
@@ -546,7 +556,6 @@ label {
 /*------------------------responsive properties------------------------*/
 
 @media (max-width: 767px) {   
-
 
 	.row:last-of-type > div > .dataTables_paginate {
 		display: table;    
@@ -598,15 +607,7 @@ label {
 		top: -7px;
 		left:180px;   	      
 	}
-
-	#MVCGridTableHolder_AuthorSearch > .row > div {                      
-		text-align: center;
-	}
-
-	#MVCGridTableHolder_AuthorSearch > .row .pagination > li {
-		display: inline-block;
-		vertical-align: middle;
-	}
+	
 }
 
 @media (min-width: 768px) {  

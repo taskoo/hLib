@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using hLib.Models;
 using hLib.DAL;
@@ -32,7 +29,6 @@ namespace hLib.Controllers
         // GET: Books/Details/5
         public ActionResult Details(int? id)
         {
-            //int bookId;
 
             if (id == null)
             {
@@ -55,7 +51,6 @@ namespace hLib.Controllers
             ViewBag.LanguageId = new SelectList(unitOfWork.LanguagesRP.GetLanguages(), "LanguageId", "LanguageName");
             var book = new Book();
             book.Authors = new List<Author>();
-            PopulateAssignedAuthorData(book);
             ViewBag.selAuthors = new MultiSelectList(new[] { "" });
             return View();
         }
@@ -129,18 +124,13 @@ namespace hLib.Controllers
         // GET: Books/Edit/5
         public ActionResult Edit(int? id)
         {
-            int bookId;
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
-            {
-                bookId = id.GetValueOrDefault();
-            }
 
-            Book book = unitOfWork.BooksRP.GetBookWithAuthors(bookId);
+
+            Book book = unitOfWork.BooksRP.GetBookWithAuthors(id.GetValueOrDefault());
 
             if (book == null)
             {
@@ -161,17 +151,12 @@ namespace hLib.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int? id, string[] bookAuthors)
         {
-            int bookId;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
-            {
-                bookId = id.GetValueOrDefault();
-            }
           
-            Book bookToUpdate = unitOfWork.BooksRP.GetBookByID(bookId);
+            Book bookToUpdate = unitOfWork.BooksRP.GetBookByID(id.GetValueOrDefault());
 
             if (TryUpdateModel(bookToUpdate, "", new string[] { "Id", "Title", "ISBN", "Description", "LanguageId", "GenreId" }))
             {
@@ -187,16 +172,13 @@ namespace hLib.Controllers
         // GET: Books/Delete/5
         public ActionResult Delete(int? id)
         {
-            int bookId;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
-            {
-                bookId = id.GetValueOrDefault();
-            }
-            Book book = unitOfWork.BooksRP.GetBookByID(bookId);
+
+            Book book = unitOfWork.BooksRP.GetBookByID(id.GetValueOrDefault());
+
             if (book == null)
             {
                 return HttpNotFound();
@@ -219,7 +201,6 @@ namespace hLib.Controllers
         {
             var allAuthors = unitOfWork.AuthorsRP.GetAuthors();
             var pAuthor = new HashSet<int>(book.Authors.Select(b => b.AuthorId));
-            var viewModelAvailable = new List<BookAuthorsVM>();
             var viewModelSelected = new List<BookAuthorsVM>();
 
             foreach (var aut in allAuthors)
@@ -232,17 +213,6 @@ namespace hLib.Controllers
                         AuthorFirstName = aut.AuthorFirstName,
                         AuthorMiddleName=aut.AuthorMiddleName,
                         AuthorLastName=aut.AuthorLastName
-                    });
-                }
-                else
-                {
-                    viewModelAvailable.Add(new BookAuthorsVM
-                    {
-                        AuthorId = aut.AuthorId,
-                        AuthorFirstName = aut.AuthorFirstName,
-                        AuthorMiddleName = aut.AuthorMiddleName,
-                        AuthorLastName = aut.AuthorLastName,
-                        
                     });
                 }
             }
@@ -258,8 +228,8 @@ namespace hLib.Controllers
             }
 
             var selectedAuthorsHS = new HashSet<string>(selectedAuthors);
-            var bookAut = new HashSet<int>
-                (bookToUpdate.Authors.Select(c => c.AuthorId));
+            var bookAut = new HashSet<int>(bookToUpdate.Authors.Select(c => c.AuthorId));
+
             foreach (var aut in unitOfWork.AuthorsRP.GetAuthors())
             {
                 if (selectedAuthorsHS.Contains(aut.AuthorId.ToString()))

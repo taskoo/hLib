@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    /*modal delete author*/
     $(document).on("click", ".open-modalDelete", function () {
         var myAuthorId = $(this).data('id');
         $("#deleteModalH4question").html('Are you sure that you want to delete author?');

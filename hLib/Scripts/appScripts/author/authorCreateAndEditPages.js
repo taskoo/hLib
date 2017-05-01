@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    /*update author displayed name*/
     $("#AuthorFirstName").on("change", function () {
         $(".detailsEditHeader").text($(this).val() + " " + $("#AuthorMiddleName").val() + " " + $("#AuthorLastName").val());
     });
@@ -12,6 +14,7 @@
         location.reload();
     });
 
+    /*delete content span icon*/
     $('.form-control.text-box.single-line').parent().append("<span class='clearer clearer-type-b glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('select.form-control.deletable#NationalityId').parent().append("<span class='clearer clearer-type-f glyphicon glyphicon-remove-circle form-control-feedback'></span>");
 
@@ -46,6 +49,8 @@
     $(".hasclear").trigger('keyup');
     $(".hasclear").trigger('change');
 
+
+    /*delete all content button*/
     $('#btnDelete').on('click', function () {
         $('#AuthorFirstName').val("");
         $('#AuthorMiddleName').val("");

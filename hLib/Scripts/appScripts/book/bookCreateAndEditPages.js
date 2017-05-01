@@ -117,6 +117,7 @@ jQuery.validator.unobtrusive.adapters.add('isbnvalidation', function (options) {
 
 $(document).ready(function () {
 
+    /*select book author function*/
     authorSelectionFunctions = {
         selectBookAuthor: function () {
 
@@ -155,6 +156,7 @@ $(document).ready(function () {
         }
     };
 
+    /*remove empty option if exist*/
     if (parseInt($('#bookAuthors option').size()) == 1 && $('#bookAuthors option').val() == "") {
         $('#bookAuthors option').remove();
     } else {
@@ -163,10 +165,18 @@ $(document).ready(function () {
 
     authorSelectionFunctions.selectBookAuthor();
 
+    /*recall after ajax*/
     $(document).ajaxComplete(function () {
         authorSelectionFunctions.selectBookAuthor();
+        $('#MVCGridTableHolder_AuthorSearch > .row > div > .pagination').removeClass('pull-right');
+        $('#MVCGridTableHolder_AuthorSearch > .row > div').each(function () {
+            $(this).removeClass('col-xs-6');
+            $(this).addClass('col-xs-12');
+        });
+       
     });
 
+    /*remove selected author/s*/
     $('#clearAuthors').on("click", function () {
         var selectedOpts = $('#bookAuthors option:selected');
         if ($(selectedOpts).size() == 0) {
@@ -180,6 +190,7 @@ $(document).ready(function () {
         }
     });
 
+    /*remove author on dblclick*/
     $('#bookAuthors').on('dblclick', 'option', function () {
         var selectedOpts = $('#bookAuthors option:selected');
         $(selectedOpts).remove();
@@ -189,7 +200,7 @@ $(document).ready(function () {
         }
     });
 
-
+    /*check number of selected authors on submit*/
     $('#btnSubmit').click(function (e) {
         $("form").valid();
         if ($('#bookAuthors option').size() == 0) {
@@ -202,6 +213,7 @@ $(document).ready(function () {
         }
     });
 
+    /*isbn popover*/
     $('#isbnInfo').popover({
         title: 'ISBN info',
         content: 'ISBN is number of 10 or 13 digits, separated with dashes. <br /> <br />' +
@@ -214,6 +226,7 @@ $(document).ready(function () {
     $('.panel.panel-default > .panel-body .form-inline.pull-right .btn-group').remove();
     $('.panel.panel-default > .panel-body .form-inline.pull-right span').remove();
 
+    /*delete content span icon*/
     $('.form-control.text-box.single-line').parent().append("<span class='clearer clearer-type-b glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('textarea').parent().append("<span class='clearer clearer-type-c glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('input[data-mvcgrid-option=search]').parent().append("<span class='clearer clearer-type-a glyphicon glyphicon-remove-circle form-control-feedback'></span>");
@@ -301,6 +314,7 @@ $(document).ready(function () {
         $("h2").text($(this).val());
     });
 
+    /*clear search author input on modal show*/
     $('#searchAuthorModal button').click(function(){
         $('input[data-mvcgrid-option=search]').val('').focus();
         $('input[data-mvcgrid-option=search]').keyup();

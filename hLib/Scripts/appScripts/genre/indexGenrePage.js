@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    /*index genre table settings*/
     var table = $('#indexGenreTable').DataTable({
         responsive: false,
         lengthMenu: [5, 10, 15, 25, 50],
@@ -15,8 +17,7 @@
         }
     });
 
-    $('.dataTables_filter input').attr("placeholder", "search...");
-
+    /*delete content icons*/
     $('.dataTables_filter > label').append("<span class='clearer clearer-type-a glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('.dataTables_filter > label > input').addClass("hasclear");
 
@@ -34,6 +35,7 @@
         $(".hasclear").trigger('keyup');
     });
 
+    /*genre modal delete*/
     $(document).on("click", ".open-modalDelete", function () {
         var myGenreId = $(this).data('id');
         $("#deleteModalH4question").html('Are you sure that you want to delete genre?');
@@ -44,6 +46,7 @@
         $("#deleteModalContent form").attr('action', action_link);
     });
 
+    /*genre modal edit*/
     $(document).on("click", ".open-modalEdit", function () {
         $("span[data-valmsg-for='GenreName']").text('');
         $("#editModalP").html('Genre name:');
@@ -66,6 +69,7 @@
         }
     });
 
+    /*genre modal create*/
     $(document).on("click", ".open-modalCreate", function () {
         $("span[data-valmsg-for='GenreName']").text('');
         $("#createModalP").html('Genre name:');

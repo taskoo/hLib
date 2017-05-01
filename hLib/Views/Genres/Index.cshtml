@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 @foreach (var item in Model)
-                    {
+                {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.GenreName)
@@ -47,12 +47,13 @@
                             </span>
                         </td>
                     </tr>
-                    }
+                }
             </tbody>
         </table>
         <hr>
     </div>
 </div>
+
 
 @Html.Partial("_modalDelete")
 @Html.Partial("_modalEdit")

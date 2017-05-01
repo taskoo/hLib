@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace hLib.DAL.Repositories
 {
@@ -19,15 +18,8 @@ namespace hLib.DAL.Repositories
 
         public IEnumerable<Book> GetBooks()
         {
-            //context.Books.Include(a => a.Authors.OrderBy(b=>b.AuthorFirstName));
             var query = context.Books.ToList().AsQueryable();
-            //query = query.Include(c => c.Authors).ToList().ForEach();
-
-
-            //context.Books.Include(c => c.Authors).Where(i => i.BookId == id).Single();
-
             return query.ToList();
-            //return context.Books.ToList();
         }
 
         public Book GetBookByID(int id)
@@ -54,55 +46,20 @@ namespace hLib.DAL.Repositories
         public void Save()
         {
             context.SaveChanges();
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        }       
 
         public Book GetBookWithAuthors(int id)
         {
             return context.Books.Include(c => c.Authors).Where(i => i.BookId == id).Single();
         }
 
-        public IEnumerable<Book> GetData(out int totalRecords, string globalSearch, /*string filterTitle, bool? filterActive, */ string orderBy, bool desc, int? limitOffset, int? limitRowCount)
+        public IEnumerable<Book> GetData(out int totalRecords, string globalSearch, string orderBy, bool desc, int? limitOffset, int? limitRowCount)
         {
-            //using (var db = new context())
-            //{
-            var query = GetBooks().ToList().AsQueryable();
 
-            //if (!String.IsNullOrWhiteSpace(filterTitle))
-            //{
-            //    query = query.Where(p => p.Title.Contains(filterTitle));
-            //}
-            /*if (!String.IsNullOrWhiteSpace(filterLastName))
-            {
-                query = query.Where(p => p.LastName.Contains(filterLastName));
-            }*/
-            //if (filterActive.HasValue)
-            //{
-            //    query = query.Where(p => p.Active == filterActive.Value);
-            //}
+            var query = GetBooks().ToList().AsQueryable();
 
             if (!String.IsNullOrWhiteSpace(globalSearch) && globalSearch != null)
             {
-                //query = query.Where(p => (p.FirstName + " " + p.LastName).Contains(globalSearch));
                 query = query.Where(p => p.Title.ToLower().Contains(globalSearch.ToLower()));
             }
 
@@ -124,12 +81,6 @@ namespace hLib.DAL.Repositories
                         else
                             query = query.OrderByDescending(p => p.BookId);
                         break;
-                        /* case "active":
-                             if (!desc)
-                                 query = query.OrderBy(p => p.Active);
-                             else
-                                 query = query.OrderByDescending(p => p.Active);
-                             break;*/
                 }
             }
 
@@ -140,7 +91,26 @@ namespace hLib.DAL.Repositories
             }
 
             return query.ToList();
-            //}
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

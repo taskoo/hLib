@@ -27,32 +27,17 @@ namespace hLib
                .WithAuthorizationType(AuthorizationType.AllowAnonymous)
                .AddColumns(cols =>
                {
-                   //            < a href = "@Url.Action("Details", new { id = item.BookId })" data - toggle = "tooltip" data - placement = "top" title = "book details" >
-
-                   //                 <i class='glyphicon glyphicon-list'></i><span class='sr-only'>Details</span>
-                   // 
-                   //</a>
-
                    cols.Add("Delete").WithHtmlEncoding(false)
                     .WithSorting(false)
                     .WithHeaderText(" ")
                     .WithValueExpression(p =>  p.AuthorId.ToString() )
                     .WithValueTemplate("<a class='authorSelectLink' value='{Value}' ><i class='glyphicon glyphicon-arrow-left'></i><span class='sr-only'>Details</span></span> </a>");
-                   //cols.Add("selectedBookAuthors").WithHtmlEncoding(false)
-                   //  .WithSorting(false)
-                   //  .WithHeaderText(" ")
-                   //  .WithValueExpression(  p => p.AuthorId.ToString() )
-                   //  .WithValueTemplate("<input type='checkbox' class='authorCheckBox' value='{Value}'></input>");
-                   //cols.Add("Id").WithSorting(false)
-                   //    .WithValueExpression(p => p.AuthorId.ToString());
                    cols.Add("AuthorFirstName").WithHeaderText("Name")
                        .WithValueExpression(p => p.AuthorFirstName);
                    cols.Add("AuthorMiddleName").WithHeaderText("Mid. name")
                        .WithValueExpression(p => p.AuthorMiddleName);
                    cols.Add("AuthorLastName").WithHeaderText("Last name")
                        .WithValueExpression(p => p.AuthorLastName);
-                   /*cols.Add("Nationality").WithHeaderText("Name")
-                       .WithValueExpression(p => p.Nationality.NationalityName.ToString());*/
                })
                .WithAdditionalQueryOptionNames("Search")
                .WithAdditionalSetting("RenderLoadingDiv", false)
@@ -63,7 +48,6 @@ namespace hLib
                    var options = context.QueryOptions;
 
                    int totalRecords;
-
 
                    var repo = new UnitOfWork(new DAL.HLibDBContext());
                    string globalSearch = options.GetAdditionalQueryOptionString("Search");

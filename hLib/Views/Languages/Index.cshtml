@@ -12,8 +12,8 @@
                 Create new language
             </a>
         </p>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*@ViewBag.errorbag*@
         
         <hr id="headerHR">
         <table id="indexLanguageTable" class="table table-bordered table-hover">
@@ -51,12 +51,12 @@
                         </td>
                     </tr>
                 }
-            </tbody>
-            
+            </tbody>            
         </table>
         <hr>
     </div>  
 </div>
+
 
 @Html.Partial("_modalDelete")
 @Html.Partial("_modalEdit")

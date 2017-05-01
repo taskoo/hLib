@@ -10,5 +10,4 @@
         var action_link = "/Books/Delete/" + myBookId;
         $("#deleteModalContent form").attr('action', action_link);
     });
-
 });

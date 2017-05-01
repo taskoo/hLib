@@ -13,7 +13,6 @@ namespace hLib.DAL.IRepositories
         void UpdateLanguage(Language language);
         void Save();
 
-
     }
 }
 

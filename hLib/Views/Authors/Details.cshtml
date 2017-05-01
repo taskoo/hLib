@@ -19,7 +19,6 @@
     </a>
 </span>
 
-
 <hr>
 
 <div>
@@ -75,24 +74,22 @@
 
                     @foreach (var item in Model.Books)
                     {
-
                         if (item.Equals(Model.Books.Last()))
                         {
                             @:<dd class="borderRight shadowLink borderBottom">
-                                }
+                        }
                         else
                         {
                             @:<dd class="borderRight shadowLink">
-                                }
+                        }
                         @:<span class="glyphicon glyphicon-link floatRight"></span>
                         @:@Html.ActionLink(@item.Title, "Details", "Books", new { id = @item.BookId }, htmlAttributes: new { }) <br />
                         @:</dd>
                     }
             </dl>
-</div>
+        </div>
     </div>
 </div>
-
 
 <p style="clear:both;">
     <hr>

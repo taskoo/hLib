@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    /*index language table settings*/
     var table = $('#indexLanguageTable').DataTable({
         responsive: false,
         lengthMenu: [5, 10, 15, 25, 50],
@@ -15,6 +17,7 @@
         }
     });
 
+    /*delete content icons*/
     $('.dataTables_filter > label').append("<span class='clearer clearer-type-a glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('.dataTables_filter > label > input').addClass("hasclear");
 
@@ -32,6 +35,7 @@
         $(".hasclear").trigger('keyup');
     });
 
+    /*language modal delete*/
     $(document).on("click", ".open-modalDelete", function () {
         var myLanguageId = $(this).data('id');
         $("#deleteModalH4question").html('Are you sure that you want to delete language?');
@@ -42,6 +46,7 @@
         $("#deleteModalContent form").attr('action', action_link);
     });
 
+    /*language modal edit*/
     $(document).on("click", ".open-modalEdit", function () {
         $("span[data-valmsg-for='LanguageName']").text('');
         $("#editModalP").html('Language name:');
@@ -64,6 +69,7 @@
         }
     });
 
+    /*language modal create*/
     $(document).on("click", ".open-modalCreate", function () {
         $("span[data-valmsg-for='LanguageName']").text('');
         $("#createModalP").html('Language name:');

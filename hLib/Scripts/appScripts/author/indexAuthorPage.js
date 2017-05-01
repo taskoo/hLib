@@ -68,7 +68,7 @@
         }
     });
 
-    /*delete content icon set*/
+    /*delete content icons*/
     $('.form-control.text-box.single-line').parent().append("<span class='clearer clearer-type-d glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('select.form-control#NationalityId').parent().append("<span class='clearer clearer-type-e glyphicon glyphicon-remove-circle form-control-feedback'></span>");
 
@@ -84,7 +84,7 @@
     $(".clearer-type-d").hide($(this).prev('input').val());
 
     $(".clearer-type-d").click(function () {
-
+            
         $(this).parent().children('input').val('').focus();
 
         if ($(this).parent().children('input').prop('id') == 'firstNameForSearch') {
@@ -103,6 +103,7 @@
         var t = $(this);
         t.parent().children('span.clearer-type-e').toggle(Boolean(t.val()));
     });
+
     $(".clearer-type-e").hide($(this).prev('select').val());
 
     $(".clearer-type-e").click(function () {

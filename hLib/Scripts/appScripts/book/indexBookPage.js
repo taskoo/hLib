@@ -76,6 +76,7 @@
         }
     });
 
+    /*delete content icons*/
     $('.form-control.text-box.single-line').parent().append("<span class='clearer clearer-type-d glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('select.form-control#GenreId').parent().append("<span class='clearer clearer-type-e glyphicon glyphicon-remove-circle form-control-feedback'></span>");
     $('select.form-control#LanguageId').parent().append("<span class='clearer clearer-type-e glyphicon glyphicon-remove-circle form-control-feedback'></span>");
@@ -84,10 +85,14 @@
     $('select.form-control#GenreId').addClass("hasclear");
     $('select.form-control#LanguageId').addClass("hasclear");
     
-
     $(".hasclear").keyup(function () {
         var t = $(this);
         t.parent().children('span.clearer-type-d').toggle(Boolean(t.val()));
+    });
+
+    $(".hasclear").on('change', function () {
+        var t = $(this);
+        t.parent().children('span.clearer-type-e').toggle(Boolean(t.val()));
     });
 
     $(".clearer-type-d").hide($(this).prev('input').val());
@@ -107,11 +112,7 @@
         }   
         $(this).hide();
     });
-
-    $(".hasclear").on('change', function () {
-        var t = $(this);
-        t.parent().children('span.clearer-type-e').toggle(Boolean(t.val()));
-    });
+    
     $(".clearer-type-e").hide($(this).prev('select').val());
 
     $(".clearer-type-e").click(function () {

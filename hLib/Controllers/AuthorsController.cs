@@ -139,7 +139,9 @@ namespace hLib.Controllers
         {
             
             Author author = unitOfWork.AuthorsRP.GetAuthorByID(id);
+
             int numberOfBooks = author.Books.Count;
+
             if (numberOfBooks == 0)
             {
                 unitOfWork.AuthorsRP.DeleteAuthor(id);

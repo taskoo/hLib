@@ -16,20 +16,8 @@ namespace hLib.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork(new DAL.HLibDBContext());
 
-        //private IBookRepository unitOfWork.BooksRP;
-
-        //public BooksController()
-        //{
-        //    this.unitOfWork.BooksRP = new BookRepository(new HolyContext());
-        //}
-
-        //public BooksController(IBookRepository unitOfWork.BooksRP)
-        //{
-        //    this.unitOfWork.BooksRP = unitOfWork.BooksRP;
-        //}
-
         // GET: Books
-        public ActionResult Index(/*string sortOrder*/)
+        public ActionResult Index()
         {
             var books = unitOfWork.BooksRP.GetBooks();
 
@@ -37,59 +25,6 @@ namespace hLib.Controllers
 
             ViewBag.GenreId = new SelectList(unitOfWork.GenresRP.GetGenres(), "GenreId", "GenreName");
             ViewBag.LanguageId = new SelectList(unitOfWork.LanguagesRP.GetLanguages(), "LanguageId", "LanguageName");
-
-            //ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "Title desc" : "";
-            //ViewBag.TitleSortParm = sortOrder == "Title" ? "Title desc" : "Title";
-            //ViewBag.GenreSortParm = sortOrder == "Genre" ? "Genre desc" : "Genre";
-            //ViewBag.LanguageSortParm = sortOrder == "Language" ? "Language desc" : "Language";
-            //ViewBag.ISBNSortParm = sortOrder == "ISBN" ? "ISBN desc" : "ISBN";
-            //ViewBag.AuthorsSortParm = sortOrder == "Author/s" ? "Author/s desc" : "Author/s";
-
-            //switch (sortOrder)
-            //{
-            //    case "Title":
-            //        books = books.OrderBy(p => p.Title);
-            //        break;
-            //    case "Title desc":
-            //        books = books.OrderByDescending(p => p.Title);
-            //        break;
-            //    case "Genre":
-            //       books = books.Where(p=>p.Genre != null).OrderBy(p => p.Genre.GenreName).Concat(books.Where(p => p.Genre == null));
-            //        break;
-            //    case "Genre desc":
-            //        books = books.Where(p => p.Genre == null).Concat(books.Where(p => p.Genre != null).OrderByDescending(p => p.Genre.GenreName));
-            //        break;
-            //    case "Language":
-            //        books = books.OrderBy(p => p.Language.LanguageName);
-            //        break;
-            //    case "Language desc":
-            //        books = books.OrderByDescending(p => p.Language.LanguageName);
-            //        break;
-            //    case "ISBN":
-            //        books = books.OrderBy(p => p.ISBN);
-            //        break;
-            //    case "ISBN desc":
-            //        books = books.OrderByDescending(p => p.ISBN);
-            //        break;
-            //    case "Author/s":                  
-            //        books = books.OrderBy(p => p.Authors.OrderBy(a => a.AuthorFirstName).Select(a => a.AuthorFirstName).FirstOrDefault());
-            //        foreach (var book in books)
-            //        {
-            //            book.Authors = book.Authors.OrderBy(m => m.AuthorFirstName).ToList();
-            //        }                  
-            //        break;
-            //    case "Author/s desc":                  
-            //        books = books.OrderByDescending(p => p.Authors.OrderByDescending(a => a.AuthorFirstName).Select(a => a.AuthorFirstName).FirstOrDefault());
-            //        foreach (var book in books)
-            //        {
-            //            book.Authors = book.Authors.OrderByDescending(m => m.AuthorFirstName).ToList();
-            //        }
-            //        break;
-            //    default:
-            //        books = books.OrderBy(p => p.Title);
-            //        break;
-            //}
-
 
             return View(books.ToList());
         }
@@ -103,12 +38,9 @@ namespace hLib.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //else
-            //{
-            //    bookId = id.GetValueOrDefault();
-            //}
-            //Book book = db.Books.Find(id);
+
             Book book = unitOfWork.BooksRP.GetBookByID(id.GetValueOrDefault());
+
             if (book == null)
             {
                 return HttpNotFound();

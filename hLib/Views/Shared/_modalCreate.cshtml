@@ -1,0 +1,39 @@
+﻿<div class="modal fade" id="createDialog" tabindex="-1" role="dialog" aria-labelledby="modalCreate">
+    <div class="modal-dialog" role="document">
+        <div id="createModalContent" class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalCreateH4"></h4>
+            </div>
+           @using (Html.BeginForm("", "", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+            <div class="modal-body">
+                
+                <p id="createModalP"></p>
+                @if (@ViewBag.currentPage == "genres") {
+                    @: @Html.Editor("GenreName", new { htmlAttributes = new { @class = "form-control required" } })
+                    @: @Html.ValidationMessage("GenreName", "", new { @class = "text-danger" })
+                }
+                @if (@ViewBag.currentPage == "languages")
+                {
+                    @: @Html.Editor("LanguageName", new { htmlAttributes = new { @class = "form-control required" } })
+                    @: @Html.ValidationMessage("LanguageName", "", new { @class = "text-danger" })
+                }
+                @if (@ViewBag.currentPage == "nationalities")
+                {
+                    @: @Html.Editor("NationalityName", new { htmlAttributes = new { @class = "form-control required" } })
+                    @: @Html.ValidationMessage("NationalityName", "", new { @class = "text-danger" })
+                }
+            </div>  
+
+            <div class="modal-footer">
+                <button id="createSubmitButton" type="submit" class="btn btn-primary">Create</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+           }      
+                
+            </div>
+        </div>
+    </div>
+           

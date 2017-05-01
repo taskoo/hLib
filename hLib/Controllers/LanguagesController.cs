@@ -1,0 +1,143 @@
+﻿using System;
+using System.Data;
+using System.Linq;
+using System.Web.Mvc;
+using hLib.Models;
+using hLib.DAL;
+
+namespace hLib.Controllers
+{
+    public class LanguagesController : Controller
+    {
+        private UnitOfWork unitOfWork = new UnitOfWork(new HLibDBContext());
+
+        // GET: Languages
+        public ActionResult Index() 
+        {
+            Exception ex = TempData["error"] as Exception;
+
+            var languages = unitOfWork.LanguagesRP.GetLanguages();
+            
+            if (ex != null)
+            {
+                ModelState.AddModelError("", "Language in use and can not be deleted!");
+            }
+
+            ViewBag.currentPage = "languages";
+            
+            return View(languages.ToList());
+        }
+
+        // GET: Languages/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }         
+        //    Language language = unitOfWork.LanguagesRP.GetLanguageByID(id.GetValueOrDefault()); 
+        //    if (language == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(language);
+        //}
+
+        // GET: Languages/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        // POST: Languages/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "LanguageId,LanguageName")] Language language)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.LanguagesRP.InsertLanguage(language);
+                unitOfWork.LanguagesRP.Save();
+                return RedirectToAction("Index");
+            }
+
+            return View(language);
+        }
+
+        // GET: Languages/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Language language = unitOfWork.LanguagesRP.GetLanguageByID(id.GetValueOrDefault());
+        //
+        //    if (language == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(language);
+        //}
+
+        // POST: Languages/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "LanguageId,LanguageName")] Language language)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.LanguagesRP.UpdateLanguage(language);
+                unitOfWork.LanguagesRP.Save();
+                return RedirectToAction("Index");
+            }
+            return View(language);
+        }
+
+        // GET: Languages/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Language language = unitOfWork.LanguagesRP.GetLanguageByID(id.GetValueOrDefault());
+        //    if (language == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(language);
+        //}
+
+        // POST: Languages/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Language language = unitOfWork.LanguagesRP.GetLanguageByID(id);
+            try
+            {
+                unitOfWork.LanguagesRP.DeleteLanguage(id);
+                unitOfWork.LanguagesRP.Save();                          
+            }
+            catch (DataException ex)
+            {
+                TempData["error"] = ex;
+            }
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                unitOfWork.LanguagesRP.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

@@ -1,0 +1,146 @@
+﻿@model IEnumerable<hLib.Models.Book>
+
+@{
+	ViewBag.Title = "Books overview";
+}
+
+<div id="wrapper">
+
+	<div id="sidebar-wrapper">
+		
+		<ul class="sidebar-nav">           
+			<li>
+				<p class="searchTitleP"><i>search by </i><strong>title</strong></p>
+				<div class="col-md-12">
+					@Html.Editor("titleForSearch", new { htmlAttributes = new { @class = "form-control" } })
+				</div>
+			</li>
+			<li>
+				<p class="searchTitleP"><i>search by </i><strong>author</strong></p>
+					<div class="col-md-12">
+						@Html.Editor("authorForSearch", new { htmlAttributes = new { @class = "form-control" } })
+					</div>
+			</li>
+			<li>
+				<p class="searchTitleP"><i>search by </i><strong>genre</strong></p>
+				<div class="col-md-12">
+					@Html.DropDownList("GenreId", null, "", htmlAttributes: new { @class = "form-control" })
+				</div>
+			</li>
+			<li>
+				<p class="searchTitleP"><i>search by </i><strong>language</strong></p>
+				<div class="col-md-12">
+					@Html.DropDownList("LanguageId", null, "", htmlAttributes: new { @class = "form-control" })
+				</div>
+			</li>
+			<li>
+				<p class="searchTitleP"><i>search by </i><strong>ISBN</strong></p>
+				<div class="col-md-12">
+					@Html.Editor("isbnForSearch", new { htmlAttributes = new { @class = "form-control" } })
+				</div>
+			</li>
+			<li>
+				<div class="col-md-12">
+						<button id="clearAllSearch" type="button" class="btn btn-primary">clear all</button>
+				</div>           
+			</li>         
+		</ul>       
+		<a href="#menu-toggle" id="menu-toggle" data-toggle="tooltip">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		</a>
+	</div>
+
+	<div id="page-content-wrapper">
+		
+		<div class="container-fluid">
+			<div class="col-md-12">                
+				<h2>Books overview</h2>             
+				<p>
+					@Html.ActionLink("Create new book", "Create")
+				</p>
+				<hr id="headerHR">
+
+				<table id="indexBookTable" class="table table-bordered table-hover nowrap" cellspacing="0" style="width:100%">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Title</th>
+							<th>Author/s</th>
+							<th>Genre</th>
+							<th>Language</th>
+							<th>ISBN</th>
+							<th class="editDeleteTableIcons"></th>
+							<th class="editDeleteTableIcons"></th>						
+						</tr>
+					</thead>
+
+					<tbody id="tableBody">
+
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td class="text-center">
+									<a href="@Url.Action("Details", new { id = item.BookId })" data-toggle="tooltip" data-placement="top" title="book details">
+										<i class="glyphicon glyphicon-list"></i>
+										<span class="sr-only">Details</span>
+									</a>
+								</td>
+								<td>
+									<strong>
+										@Html.DisplayFor(modelItem => item.Title)
+									</strong>
+								</td>
+								<td>								
+									@{
+										foreach (var auth in item.Authors)
+										{
+											@:<div class="shadowLink">
+												@:<span class="glyphicon glyphicon-link"></span>
+												@Html.ActionLink(@auth.FullName, "Details", "Authors", new { id = @auth.AuthorId }, htmlAttributes: new { }) <br />
+											@:</div>													
+										}
+									}
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Genre.GenreName)
+								</td>
+								<td>
+									@Html.DisplayFor(modelItem => item.Language.LanguageName)
+								</td>
+								
+								<td>
+									@Html.DisplayFor(modelItem => item.ISBN)
+								</td>
+								<td class="text-center">
+									<a href="@Url.Action("Edit", new { id = item.BookId })" data-toggle="tooltip" data-placement="top" title="edit book">
+										<i class="glyphicon glyphicon-pencil"></i>
+										<span class="sr-only">Edit</span>
+									</a>
+								</td>
+								<td class="text-center">
+									<span data-toggle="tooltip" data-placement="top" title="delete book">
+										<a data-toggle="modal" data-id="@item.BookId" data-title="@item.Title" class="open-modalDelete" href="#deleteDialog" >
+											<i class="glyphicon glyphicon-remove-sign"></i>
+											<span class="sr-only">Delete</span>
+										</a>
+									</span>
+								</td>							   
+							</tr>
+							}
+					</tbody>
+				</table>
+				<hr>
+			</div>
+		</div>		
+	</div>
+</div>
+
+@Html.Partial("_modalDelete")
+
+@section Scripts {
+	@Styles.Render("~/Content/simple-sidebar")
+	@Scripts.Render("~/bundles/jqueryDataTablesBootstrap")
+	@Scripts.Render("~/bundles/indexBookPage")
+	@Scripts.Render("~/bundles/modalBook")
+	
+}

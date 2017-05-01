@@ -1,0 +1,112 @@
+﻿@model hLib.Models.Author
+
+@{
+    ViewBag.Title = "Author details";
+}
+
+<h2 class="detailsEditHeader">@Model.AuthorFirstName @Model.AuthorMiddleName @Model.AuthorLastName</h2>
+<h4>author details</h4>
+
+<a href="@Url.Action("Edit", new { id = Model.AuthorId })" data-toggle="tooltip" data-placement="left" title="edit author">
+    <i class="glyphicon glyphicon-pencil editLink"></i>
+    <span class="sr-only"></span>
+</a>
+
+<span data-toggle="tooltip" data-placement="right" title="delete author">
+    <a data-toggle="modal" data-id="@Model.AuthorId" data-title="@Model.AuthorFirstName @Model.AuthorLastName" title="delete author" class="open-modalDelete" href="#deleteDialog">
+        <i class="glyphicon glyphicon-remove-sign removeLink"></i>
+        <span class="sr-only">Delete</span>
+    </a>
+</span>
+
+
+<hr>
+
+<div>
+     
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+
+
+                <dt class="borderRight">
+                    @Html.DisplayNameFor(model => model.AuthorFirstName)
+                </dt>
+
+                <dd class="borderRight">
+                    @Html.DisplayFor(model => model.AuthorFirstName)
+                </dd>
+
+                <dt class="borderRight">
+                    @Html.DisplayNameFor(model => model.AuthorMiddleName)
+                </dt>
+
+                <dd class="borderRight">
+                    @Html.DisplayFor(model => model.AuthorMiddleName)
+                </dd>
+
+                <dt class="borderRight">
+                    @Html.DisplayNameFor(model => model.AuthorLastName)
+                </dt>
+
+                <dd class="borderRight borderBottom">
+                    @Html.DisplayFor(model => model.AuthorLastName)
+                </dd>
+                <dt><br></dt>
+                <dd><br></dd>
+                <dt class="borderRight">
+                    @Html.DisplayNameFor(model => model.Nationality.NationalityName)
+                </dt>
+                <dd class="borderRight borderBottom">
+                    @Html.DisplayFor(model => model.Nationality.NationalityName)
+                </dd>
+                <dt><br></dt>
+                <dd><br></dd>
+                <dt class="borderRight">Number of books</dt>
+                <dd class="borderRight borderBottom">@Html.DisplayFor(model => Model.Books.Count)</dd>
+
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt class="borderRight">
+                    Book/s                    
+                </dt>
+
+                    @foreach (var item in Model.Books)
+                    {
+
+                        if (item.Equals(Model.Books.Last()))
+                        {
+                            @:<dd class="borderRight shadowLink borderBottom">
+                                }
+                        else
+                        {
+                            @:<dd class="borderRight shadowLink">
+                                }
+                        @:<span class="glyphicon glyphicon-link floatRight"></span>
+                        @:@Html.ActionLink(@item.Title, "Details", "Books", new { id = @item.BookId }, htmlAttributes: new { }) <br />
+                        @:</dd>
+                    }
+            </dl>
+</div>
+    </div>
+</div>
+
+
+<p style="clear:both;">
+    <hr>
+    <div>
+        <a href="@Url.Action("Index", "Authors")" data-toggle="tooltip" data-placement="bottom" title="back to index page">
+            <i class="glyphicon glyphicon-arrow-left backLink"></i>
+            <span class="sr-only">Back</span>
+        </a>
+    </div>
+</p>
+
+
+@Html.Partial("_modalDelete")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/modalAuthor")
+}

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<hLib.Models.Language>
+
+@{
+    ViewBag.Title = "Languages";
+}
+
+<div class="container-fluid">
+    <div class="col-md-12">
+        <h2>Languages overview</h2>
+        <p>
+            <a data-toggle="modal" class="open-modalCreate" href="#createDialog">
+                Create new language
+            </a>
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@ViewBag.errorbag*@
+        
+        <hr id="headerHR">
+        <table id="indexLanguageTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LanguageName)
+                    </th>
+                    <th class="editDeleteTableIcons"></th>
+                    <th class="editDeleteTableIcons"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LanguageName)
+                        </td>
+                        <td class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="edit language">
+                                <a data-toggle="modal" data-id="@item.LanguageId" data-title="@item.LanguageName" class="open-modalEdit" href="#editDialog">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    <span class="sr-only" style="align-content:center">Edit</span>
+                                </a>
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="delete language">
+                                <a data-toggle="modal" data-id="@item.LanguageId" data-title="@item.LanguageName" class="open-modalDelete" href="#deleteDialog">
+                                    <i class="glyphicon glyphicon-remove-sign"></i>
+                                    <span class="sr-only" style="align-content:center">Delete</span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            
+        </table>
+        <hr>
+    </div>  
+</div>
+
+@Html.Partial("_modalDelete")
+@Html.Partial("_modalEdit")
+@Html.Partial("_modalCreate")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryDataTablesBootstrap")
+    @Scripts.Render("~/bundles/indexLanguagePage")   
+}
+

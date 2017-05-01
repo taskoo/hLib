@@ -1,0 +1,136 @@
+﻿@model IEnumerable<hLib.Models.Author>
+
+@{
+    ViewBag.Title = "Authors overview";
+}
+
+<div id="wrapper">
+
+    <div id="sidebar-wrapper">
+
+        <ul class="sidebar-nav">
+            <li>
+                <p class="searchTitleP"><i>search by author </i><strong>first </strong>name</p>
+                <div class="col-md-12">
+                    @Html.Editor("firstNameForSearch", new { htmlAttributes = new { @class = "form-control" } })                    
+                </div>
+            </li>
+            <li>
+                <p class="searchTitleP"><i>search by author </i><strong>middle </strong>name</p>
+                <div class="col-md-12">
+                    @Html.Editor("middleNameForSearch", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </li>
+            <li>
+                <p class="searchTitleP"><i>search by author </i><strong>last </strong>name</p>
+                <div class="col-md-12">
+                    @Html.Editor("lastNameForSearch", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </li>
+            <li>
+                <p class="searchTitleP"><i>search by author </i><strong>nationality</strong></p>
+                <div class="col-md-12">
+                    @Html.DropDownList("NationalityId", null, "",  htmlAttributes: new { @class = "form-control" })
+                </div>
+            </li>
+            <li>
+                <div class="col-md-12">
+                    <button id="clearAllSearch" type="button" class="btn btn-primary">clear all</button>
+                </div>
+            </li>
+        </ul>
+        <a href="#menu-toggle" id="menu-toggle" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <h2>Authors overview</h2>
+
+                <p>
+                    @Html.ActionLink("Create new author", "Create")
+                </p>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @ViewBag.temp
+                <hr id="headerHR">
+
+                <table id="indexAuthorTable" class="table table-bordered table-hover nowrap" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AuthorFirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AuthorMiddleName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AuthorLastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nationality.NationalityName)
+                            </th>
+                            <th>no. of books</th>
+                            <th class="editDeleteTableIcons"></th>
+                            <th class="editDeleteTableIcons"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Details", new { id = item.AuthorId })" data-toggle="tooltip" data-placement="top" title="author details">
+                                        <i class="glyphicon glyphicon-list"></i>
+                                        <span class="sr-only">Details</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AuthorFirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AuthorMiddleName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AuthorLastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nationality.NationalityName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Books.Count)
+                                </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Edit", new { id = item.AuthorId })" data-toggle="tooltip" data-placement="top" title="edit author">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                        <span class="sr-only">Edit</span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <span data-toggle="tooltip" data-placement="top" title="delete author">
+                                        <a data-toggle="modal" data-id="@item.AuthorId" data-title="@item.FullName" class="open-modalDelete" href="#deleteDialog">
+                                            <i class="glyphicon glyphicon-remove-sign"></i>
+                                            <span class="sr-only">Delete</span>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_modalDelete")
+
+@section Scripts {
+    @Styles.Render("~/Content/simple-sidebar")
+    @Scripts.Render("~/bundles/jqueryDataTablesBootstrap")
+    @Scripts.Render("~/bundles/indexAuthorPage")
+    @Scripts.Render("~/bundles/modalAuthor")
+}

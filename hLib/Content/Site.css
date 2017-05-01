@@ -1,24 +1,636 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
+   will truncate terms that are too long to fit in the left column*/
 .dl-horizontal dt {
-    white-space: normal;
+	white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 280px;
+	max-width: 280px;
 }
+
+
+
+
+
+/*----------------------------SCROLL BAR----------------------------*/
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgb(0, 148, 255);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.5);    
+}
+/*----------------------------SCROLL BAR----------------------------*/
+
+
+
+
+
+
+/*-------------------book and author detailes pages------------------*/
+.borderRight {
+	border-right: solid 5px #0094ff;
+}
+
+dd, dt {
+	padding-right:10px;
+	padding-left:10px;
+}
+
+dt {
+	color:mediumblue;
+}
+
+.borderBottom {
+	border-bottom:solid 1px #0094ff;
+}
+/*-------------------book and author detailes pages-------------------*/
+
+
+
+
+
+
+/*--------------------------HOME INDEX PAGE--------------------------*/
+
+/*logo properties*/
+html > body #logoDiv {
+	height: 400px;
+	width: 400px;
+	margin-top: 20px;
+	background-color: white;
+	align-content: center;
+	float: right;
+}
+/*logo img properties*/
+	html > body #logoDiv > img {
+		display: block;
+		position: relative;
+		top: 60px;
+		left: 120px;
+		vertical-align: central;
+		max-height: 100%;
+		max-width: 100%;
+	}
+
+/*home index button icon properties*/
+html > body .indexHomeIcons {
+	height: 17px;
+	width: 17px;
+}
+
+/*home index button link text properties*/
+.homeIndexButton > a {
+	color:black;		
+}
+
+/*home index button link - removing default text decoration*/
+.homeIndexButton > a:hover {
+	text-decoration:none;		
+}
+
+/*home index main div properties*/
+.indexPageTitleDiv {
+	background-color:#428bca; 
+	height:200px; 
+	border-radius: 0 20px 0 50px;
+}
+
+/*home index main div h1 properties*/
+.indexPageTitleDiv > div > h1 {
+	color:white; 
+	padding-top:50px;
+}
+
+/*home index main div h4 properties*/
+.indexPageTitleDiv > div > h4 {
+	margin:0px;
+}
+
+/*header hr properties*/
+#headerHR {
+	margin-bottom:0px;
+	margin-top:0px;
+}
+
+.mainLink {
+	font-weight:bolder;
+	font-size:medium;
+}
+
+.normalLink {
+	font-size:smaller;
+}
+
+.aboutLink {
+	font-weight:bolder;
+}
+/*--------------------------HOME INDEX PAGE--------------------------*/
+
+
+
+
+
+
+/*--------------------index book and author pages--------------------*/
+
+/*index book and author pages - remove default dots for responsive table*/
+tbody > tr > td.child > ul > li {
+	list-style-type: none;
+} 
+
+
+/*author and book index pages - aligning*/
+#indexAuthorTable > .dataTables_info, #indexBookTable > .dataTables_info {
+	text-align:center;
+}
+
+/*author and book index pages - aligning*/
+#indexBookTable_info, #indexAuthorTable_info {
+	text-align:center;
+}
+
+/*index author and book pages*/
+#indexBookTable, #indexAuthorTable {
+	width:100%;
+}
+
+/*visible content properties*/
+#page-content-wrapper {
+	padding:0px;	
+}
+
+/*search menu item properties*/
+.searchTitleP {
+	margin-bottom:0px; 
+	height: 30px;
+	font-size:x-small;
+}
+
+/*clear search fileds*/
+#clearAllSearch {
+	position:absolute;
+	width:200px; 
+	padding:0px;
+	margin: 20px 0px 10px -100px;
+	left:50%;
+	height:15px;
+	font-size:x-small;
+}
+
+/*positioning link icon in book table index page*/
+#indexBookTable .glyphicon.glyphicon-link {
+	float:right
+}
+
+#titleForSearch, #authorForSearch, #isbnForSearch {
+	padding-right:20px;
+}
+
+#sidebar-wrapper #GenreId, #sidebar-wrapper #LanguangeId{
+	padding-right:25px;
+}
+
+/*--------------------index book and author pages--------------------*/
+
+
+
+
+
+
+/*------------------------------FOOTER------------------------------*/
+footer {                                                
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 30px;
+	width: 100%;
+	background: black;
+	color: white;
+	z-index: 9999;
+}
+
+.footerhr {
+	margin-bottom: 5px;
+	margin-top: 0px;
+}
+
+.footerp {
+	text-align: center;
+	font-size: small;
+}
+
+footer > p > span {
+	color:#428bca;
+}
+/*------------------------------FOOTER------------------------------*/
+
+
+
+
+
+
+/*--------------------MORE THEN ONE PAGE RELATED--------------------*/
+
+/*justify text in <p> tag */
+.justifyP {
+	text-align: justify;
+	text-justify: inter-word;
+}
+
+
+/*link icon properties*/
+.editLink, .removeLink  {
+	font-size: 17px;
+}
+
+/*link icon properties*/
+.backLink {
+	font-size: 30px;
+	padding-bottom:40px;
+}
+
+/*link icon properties*/
+.removeLink {
+	margin-left:15px;
+}
+
+/*modal header properties*/
+.modal-header {		
+	background-color: #428bca;
+	border-radius: 5px 5px 0 0;
+}
+
+/*modal header text properties*/
+.modal-header > h4 {
+	font-weight:bold;
+}
+
+/*modal header <p> properties*/
+#deleteModalP {
+	font-weight:bold;
+	color: #428bca;
+}
+
+/*shadow properties for author and book index and detailes pages - hover*/
+.shadowLink:hover{    
+	text-shadow: 1px 1px 5px #8989ff;
+}
+
+/*shadow properties for author and book index and detailes pages - non hover*/
+.shadowLink {
+	font-style:italic;	 
+}
+
+/*author link color property*/
+ .shadowLink > * {
+	color:black;
+ }
+		
+
+/*search filed clear icon*/
+.clearer {
+	position: absolute;
+	cursor: pointer;
+	color: #ccc;
+	bottom: 0;
+}
+
+/*search filed clear icon*/
+.clearer-type-a {    
+	right: 20px;
+	top: 12px;   
+	height: 14px;
+	width: 14px;
+	margin: auto;
+	font-size: 14px;   
+}
+
+/*search filed clear icon*/
+.clearer-type-b {    
+	left: 270px;
+	top: 7px;
+	bottom: 0;
+	height: 18px;
+	width: 18px;
+	margin: 0px;
+	font-size: 18px;   
+}
+
+/*search filed clear icon*/
+.clearer-type-c {    
+	left: 855px;
+	top: 5px;
+	bottom: 0;
+	height: 18px;
+	width: 18px;
+	margin: 0px;
+	font-size: 18px;  	  
+}
+
+/*search filed clear icon*/
+.clearer-type-d {    
+	left: 196px;
+	top: -2px;   
+	height: 14px;
+	width: 14px;
+	margin: auto;
+	font-size: 14px;   
+}
+
+/*search filed clear icon*/
+.clearer-type-e {    
+	left: 180px;
+	top: -2px;   
+	height: 14px;
+	width: 14px;
+	margin: auto;
+	font-size: 14px;   
+}
+
+/*search filed clear icon*/
+.clearer-type-f {    
+	left: 255px;
+	top: 7px;
+	bottom: 0;
+	height: 18px;
+	width: 18px;
+	margin: 0px;
+	font-size: 18px;  
+}
+
+/*float righr property*/
+.floatRight {
+	float: right;
+}
+
+/*hr coloring*/
+hr {    
+	border: 0;
+	height: 0;
+	border-top: 1px solid cornflowerblue;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);   
+}
+
+.navbar-brand {
+	color:#428bca !important;
+	font-weight:900;
+}
+
+/*making space for clear icon*/
+.padding28 {
+	padding-right:28px;
+}
+
+/*select author modal*/
+.authorSelectLink:hover {
+	cursor:pointer;
+}
+
+/*select author modal*/
+.authorSelectLink {
+   font-size:large;
+   margin:auto;
+}
+
+/*--------------------MORE THEN ONE PAGE RELATED--------------------*/
+
+
+
+
+
+
+/*----------------------------DATA TABLES----------------------------*/
+
+thead {
+	background-color: #428bca;   
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination{
+	margin:5px;
+	float:right;
+}
+
+.dataTables_info {
+	font-size:small;
+	color:blue;
+}
+
+/*edit and delete icon column in table*/
+.editDeleteTableIcons {
+	width:5%;
+}
+
+label {
+	text-align:left;
+	padding-top:20px;
+}
+
+#indexBookTable #tableBody ul li:last-child > *, #indexBookTable #tableBody ul li:nth-last-child(2) > *, #indexAuthorTable #tableBody ul li:last-child > *, #indexAuthorTable #tableBody ul li:nth-last-child(2) > * {
+	float:left;
+	margin-right:15px;
+}
+/*----------------------------DATA TABLES----------------------------*/
+
+
+
+
+
+
+/*---------------------EDIT AND CREATE BOOK PAGES---------------------*/
+
+/*select book authors select list properties*/
+#clearAuthors {
+	position: absolute;
+	left: 260px;
+	top: 4px;
+	height: 14px;
+	cursor: pointer;
+	color: #ccc;
+	display: none;
+}
+
+/*author and book edit pages - shadow*/
+.detailsEditHeader {
+	text-shadow: 0px 0.5px 2px blue;
+}
+
+/*book create and edit pages*/
+#bookAuthors {
+	min-height: 133px;   
+	padding-right:20px;
+}
+
+/*book description properties*/
+#Description{
+	min-width: 83%;
+}
+
+/*isbn additional info icon image property*/
+#isbnInfo > img {
+	height:22px;
+	width:22px;
+}
+
+/*isbn additional info icon property*/
+#isbnInfo {
+	display:block;
+	height:22px;
+	width:22px;
+	color:antiquewhite;      
+	float:left; 
+	margin: 5px 0px 0px 5px; 
+}
+
+/*isbn popover title property*/
+.popover-title {
+	font-weight:bold;
+	background-color:#428bca;
+}
+
+#ISBN {
+	float:left;
+}
+
+.panel.panel-default {
+	margin:0px;
+}
+
+.panel.panel-default > .panel-body {
+	padding-bottom:0px;
+	padding-top:0px;
+}
+
+.panel.panel-default > .panel-body label {
+	padding-top:0px;
+}
+
+#searchAuthorModal > .modal-dialog > .modal-content > .modal-body {
+	padding-bottom:0px;
+}
+
+#searchAuthorModal > .modal-dialog > .modal-content > .modal-footer {
+	padding:10px 20px 10px 10px;
+	
+}
+/*---------------------EDIT AND CREATE BOOK PAGES---------------------*/
+
+
+
+
+
+
+/*------------------------responsive properties------------------------*/
+
+@media (max-width: 767px) {   
+
+
+	.row:last-of-type > div > .dataTables_paginate {
+		display: table;    
+		margin-right: auto;
+		margin-left: auto;
+	}
+	
+	.dataTables_filter > label {
+		padding:0px;
+	}
+	
+	.top {
+		display: table;    
+		margin-right: auto;
+		margin-left: auto; 
+	}
+
+	.dataTables_length > label {
+		padding-top:7px;
+	}
+
+	.navbar-header {
+		width:auto;
+	}
+
+	.dataTables_wrapper > .top > .dataTables_paginate  {
+		display: table;           
+		margin-right: auto;
+		margin-left: auto;   
+	}
+
+	.clearer-type-c {    
+		position:relative;
+		float:right;
+		left: -18%;
+		top: -110px;
+		bottom: 0;
+		height: 18px;
+		margin: 0px;
+		font-size: 18px;          
+		width:18px;              
+	}
+
+	.panel.panel-default > .panel-body .form-inline.pull-right .form-group {
+		margin-bottom:0px;
+	}
+
+	.clearer-type-a {    	    
+		top: -7px;
+		left:180px;   	      
+	}
+
+	#MVCGridTableHolder_AuthorSearch > .row > div {                      
+		text-align: center;
+	}
+
+	#MVCGridTableHolder_AuthorSearch > .row .pagination > li {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+@media (min-width: 768px) {  
+	.top {
+		float:right;
+		margin-bottom:5px;
+	}    
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	#Description{
+		min-width: 89%;
+	}
+	.clearer-type-c {    
+		left: 755px;        
+	}   
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+   .clearer-type-c {    
+		left: 589px;        
+	} 
+   .clearer-type-a {    	    
+		top: 13px;   	      
+	}
+}
+/*------------------------responsive properties------------------------*/

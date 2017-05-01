@@ -1,0 +1,107 @@
+﻿@model hLib.Models.Book
+@using hLib.Models
+
+@{
+    ViewBag.Title = "Create new book";
+}
+
+<h2>Create new book</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>book</h4>     
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control padding28" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>               
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">                        
+                        @Html.EditorFor(model => model.ISBN, new { htmlAttributes = new { @class = "form-control padding28" } })
+                        <a id="isbnInfo" tabindex="0" data-html="true" data-placement="bottom" data-toggle="popover" data-trigger="focus" title="ISBN info" data-content="">
+                            <img alt="ISBN info" src="~/Content/icons/isbnInfo.ico" >
+                        </a>
+                        <br>
+                        <br>
+                        @Html.ValidationMessageFor(model => model.ISBN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LanguageId, "Language", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("LanguageId", null, "Select language...", htmlAttributes: new { @class = "form-control required deletable padding28" })
+                        @Html.ValidationMessageFor(model => model.LanguageId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GenreId, "Genre", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("GenreId", null, "Select genre...", htmlAttributes: new { @class = "form-control padding28" })
+                        @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
+                    </div>
+                </div>                
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Author/s</label>
+                    <div class="col-md-10">
+                        @Html.ListBox("bookAuthors", (MultiSelectList)ViewBag.selAuthors, htmlAttributes: new { @class = "form-control", size = '7' })
+                        <span id="clearAuthors" class="glyphicon glyphicon-remove-circle clearAuthors"></span>
+                        @Html.ValidationMessage("bookAuthors", "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <span data-toggle="tooltip" data-placement="right" title="select author">
+                            <button type="button" id="btnSearch" data-toggle="modal" data-target="#searchAuthorModal" class="btn btn-default">
+                                <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>            
+         </div>  
+        <div class="form-group">        
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-11">
+                <textarea name="Description" id="Description" class="form-control" maxlength = "500" rows="5" value=""></textarea>
+                @Html.ValidationMessage("Description", "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-11">
+                <input type="submit" id="btnSubmit" value="Create" class="btn btn-primary" />
+                <button type="button" id="btnDelete" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="clear all">                    
+                    <span class="glyphicon glyphicon-remove-sign"></span>                 
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<hr>
+
+<div>
+    <a href="@Url.Action("Index", "Books")" data-toggle="tooltip" data-placement="bottom" title="back to index page">
+        <i class="glyphicon glyphicon-arrow-left backLink"></i>
+        <span class="sr-only">Back</span>
+    </a>
+</div>
+
+@Html.Partial("_authorsListModal")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bookCreateAndEditPages")
+}

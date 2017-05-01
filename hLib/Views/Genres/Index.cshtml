@@ -1,0 +1,64 @@
+﻿@model IEnumerable<hLib.Models.Genre>
+
+@{
+    ViewBag.Title = "Genres";
+}
+
+<div class="container-fluid">
+    <div class="col-md-12">
+        <h2>Genre  overview</h2>
+        <p>
+            <a data-toggle="modal" class="open-modalCreate" href="#createDialog">
+                Create new genre
+            </a>
+        </p>
+        <hr id="headerHR">
+        <table id="indexGenreTable" class="table table-bordered table-hover" cellspacing="0" >
+            <thead>
+                <tr>
+                    <th style="width:auto;">
+                        @Html.DisplayNameFor(model => model.GenreName)
+                    </th>
+                    <th class="editDeleteTableIcons"></th>
+                    <th class="editDeleteTableIcons"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GenreName)
+                        </td>
+                        <td class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="edit genre">
+                                <a data-toggle="modal" data-id="@item.GenreId" data-title="@item.GenreName" class="open-modalEdit" href="#editDialog">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                    <span class="sr-only" style="align-content:center">Edit</span>
+                                </a>
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <span data-toggle="tooltip" data-placement="top" title="delete genre">
+                                <a data-toggle="modal" data-id="@item.GenreId" data-title="@item.GenreName" class="open-modalDelete" href="#deleteDialog">
+                                    <i class="glyphicon glyphicon-remove-sign"></i>
+                                    <span class="sr-only" style="align-content:center">Delete</span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    }
+            </tbody>
+        </table>
+        <hr>
+    </div>
+</div>
+
+@Html.Partial("_modalDelete")
+@Html.Partial("_modalEdit")
+@Html.Partial("_modalCreate")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryDataTablesBootstrap")
+    @Scripts.Render("~/bundles/indexGenrePage")
+}

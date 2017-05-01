@@ -1,0 +1,118 @@
+﻿@model hLib.Models.Book
+
+@{
+    ViewBag.Title = "Book details";
+}
+
+<h2 class="detailsEditHeader">@Model.Title</h2>
+
+<h4>book details</h4>
+
+<a href="@Url.Action("Edit", new { id = Model.BookId })" data-toggle="tooltip" data-placement="left" title="edit book">
+    <i class="glyphicon glyphicon-pencil editLink"></i>
+    <span class="sr-only"></span>
+</a> 
+
+<span data-toggle="tooltip" data-placement="right" title="delete book">
+    <a data-toggle="modal" data-id="@Model.BookId" data-title="@Model.Title" title="delete book" class="open-modalDelete" href="#deleteDialog">
+        <i class="glyphicon glyphicon-remove-sign removeLink"></i>
+        <span class="sr-only">Delete</span>
+    </a>
+</span>
+<hr>
+
+<div class="container" >
+    <div class="col-md-5">
+        <dl class="dl-horizontal pull-left">
+            <dt class="borderRight">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd class="borderRight borderBottom">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt><br></dt>
+            <dd><br></dd>
+
+            <dt class="borderRight">
+                Author/s
+            </dt>
+
+            @foreach (var item in Model.Authors)
+            {
+                
+                if (item.Equals(Model.Authors.Last()))
+                {
+                    @:<dd class="borderRight shadowLink borderBottom">
+                }
+                else
+                {
+                    @:<dd class="borderRight shadowLink">                    
+                }
+                @:<span class="glyphicon glyphicon-link floatRight"></span>
+                @:@Html.ActionLink(@item.FullName, "Details", "Authors", new { id = @item.AuthorId }, htmlAttributes: new {  }) <br />
+                @:</dd>                
+            }
+            <dt><br></dt>
+            <dd><br></dd>
+            <dt class="borderRight">
+                @Html.DisplayNameFor(model => model.Genre.GenreName)
+            </dt>
+
+            <dd class="borderRight borderBottom">
+                @Html.DisplayFor(model => model.Genre.GenreName)
+            </dd>
+            <dt><br></dt>
+            <dd><br></dd>
+            <dt class="borderRight">
+                @Html.DisplayNameFor(model => model.Language.LanguageName)
+            </dt>
+
+            <dd class="borderRight borderBottom">
+                @Html.DisplayFor(model => model.Language.LanguageName)
+            </dd>
+            <dt><br></dt>
+            <dd><br></dd>
+            <dt class="borderRight">
+                @Html.DisplayNameFor(model => model.ISBN)
+            </dt>
+
+            <dd class="borderRight borderBottom">
+                @Html.DisplayFor(model => model.ISBN)
+            </dd>
+
+        </dl>
+
+    </div>
+    <div class="col-md-7">
+        <dl class="dl-horizontal pull-left">
+            <dt class="borderRight">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd class="borderRight borderBottom justifyP">
+                @Html.DisplayFor(model => model.Description, new { @class = "text-justify" })
+            </dd>
+            <dt></dt>
+            <dd></dd>
+        </dl>
+
+    </div>
+</div>
+<hr>
+<div>
+    <a href="@Url.Action("Index", "Books")" data-toggle="tooltip" data-placement="bottom" title="back to index page">
+        <i class="glyphicon glyphicon-arrow-left backLink"></i>
+        <span class="sr-only">Back</span>
+    </a>
+</div>
+
+
+
+@Html.Partial("_modalDelete")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/modalBook")
+}

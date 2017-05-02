@@ -20,7 +20,7 @@ namespace hLib.Controllers
             
             if (ex != null)
             {
-                ModelState.AddModelError("", "Language in use and can not be deleted!");
+                ModelState.AddModelError("", "Language in use and cannot be deleted!");
             }
 
             ViewBag.currentPage = "languages";
@@ -66,7 +66,6 @@ namespace hLib.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Language language = unitOfWork.LanguagesRP.GetLanguageByID(id);
             try
             {
                 unitOfWork.LanguagesRP.DeleteLanguage(id);

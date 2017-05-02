@@ -12,7 +12,9 @@
                 Create new nationality
             </a>
         </p>
-        
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <hr id="headerHR">
         <table id="indexNationalitiesTable" class="table table-bordered table-hover">
             <thead>

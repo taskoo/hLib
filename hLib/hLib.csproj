@@ -206,6 +206,10 @@
     <Compile Include="DAL\Migrations\201704151558594_initial_state.Designer.cs">
       <DependentUpon>201704151558594_initial_state.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Migrations\201705021940419_authorNationalityRequired.cs" />
+    <Compile Include="DAL\Migrations\201705021940419_authorNationalityRequired.Designer.cs">
+      <DependentUpon>201705021940419_authorNationalityRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="DAL\Repositories\AuthorRepository.cs" />
     <Compile Include="DAL\Repositories\BookRepository.cs" />
@@ -530,6 +534,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DAL\Migrations\201704151558594_initial_state.resx">
       <DependentUpon>201704151558594_initial_state.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\Migrations\201705021940419_authorNationalityRequired.resx">
+      <DependentUpon>201705021940419_authorNationalityRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

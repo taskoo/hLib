@@ -25,8 +25,8 @@ namespace hLib.Models
         [StringLength(50, ErrorMessage = "Last name cannot be more than 50 characters.")]
         public string AuthorLastName { get; set; }
 
-        
-        public int? NationalityId { get; set; }
+        [Required(ErrorMessage = "Nationality can not be empty!")]
+        public int NationalityId { get; set; }
 
         [Display(Name = "Nationality")]
         public virtual Nationality Nationality { get; set; }

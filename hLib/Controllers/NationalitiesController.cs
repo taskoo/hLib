@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using hLib.Models;
 using hLib.DAL;
+using System.Data;
+using System;
 
 namespace hLib.Controllers
 {
@@ -12,8 +14,17 @@ namespace hLib.Controllers
         // GET: Nationalities
         public ActionResult Index()
         {
-            ViewBag.currentPage = "nationalities";
+            Exception ex = TempData["error"] as Exception;
+
             var nationalities = unitOfWork.NationalitiesRP.GetNationalitys();
+
+            if (ex != null)
+            {
+                ModelState.AddModelError("", "Nationality assigned to author and and cannot be deleted!");
+            }
+
+            ViewBag.currentPage = "nationalities";
+
             return View(nationalities.ToList());
         }
 
@@ -55,8 +66,16 @@ namespace hLib.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            unitOfWork.NationalitiesRP.DeleteNationality(id);
-            unitOfWork.NationalitiesRP.Save();
+            try
+            {
+                unitOfWork.NationalitiesRP.DeleteNationality(id);
+                unitOfWork.NationalitiesRP.Save();
+            }
+            catch (DataException ex)
+            {
+                TempData["error"] = ex;
+            }
+
             return RedirectToAction("Index");
         }
 
